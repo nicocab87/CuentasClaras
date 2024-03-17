@@ -2,8 +2,13 @@ const express = require('express');
 const handlebars = require ('express-handlebars');
 const viewsRouter = require ('./routes/views.router');
 const userRouter = require ('./routes/user.router');
-const { default: mongoose } = require('mongoose');
+const sessionRouter = require ('./routes/session.router')
+const mongoose  = require('mongoose');
 const { Server } = require('socket.io');
+const session = require ("express-session")
+const passport = require('passport');
+const initializePassport = require('./config/passport.config');
+const MongoStore = require('connect-mongo');
 require ('dotenv').config();
 
 
@@ -28,20 +33,37 @@ app.use(express.static(`${__dirname}/public`));
 // Middleware
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
-app.use('/', viewsRouter)
-app.use('/api/user', userRouter)
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: `mongodb+srv://nicolasferreyram:${process.env.MONGO_PASSWORD}@cluster0.hzrrjcf.mongodb.net/cuentasClaras`
+    }),
+    secret:'cjspr7387lp86cab',
+    resave: true,
+    saveUninitialized: false
+}))
 
 // database connection
 mongoose.connect(`mongodb+srv://nicolasferreyram:${process.env.MONGO_PASSWORD}@cluster0.hzrrjcf.mongodb.net/cuentasClaras`).then(()=>{
     console.log('Mongoose conected')
 });
 
+// Passport
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session())
+
+// Routes
+app.use('/', viewsRouter)
+app.use('/api/user', userRouter)
+app.use('/api/session', sessionRouter)
+
+
 
 // Server up
 const server = app.listen(port,()=>console.log(`Se ha levantado el servidor ${port}`));
 
 // socket.io
+
 
 const io = new Server(server);
 
@@ -50,11 +72,6 @@ io.on('connection', (socket)=>{
 
     socket.on('Disconnect', ()=>{
         console.log(`${socket,id} desconectado`)
-    })
-
-    socket.on('userName', (data)=>{
-        console.log('a')
-        console.log(data)
     })
 })
 

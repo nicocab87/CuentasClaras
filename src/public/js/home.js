@@ -1,7 +1,6 @@
-const socket = io();
-
 // Variables
 const nameForm = document.getElementById("nameForm");
+const userNamesDiv = document.getElementById("userNames")
 
 // EventListenner
 
@@ -9,7 +8,6 @@ nameForm.addEventListener('submit', async (e)=>{
 
     const formData = new FormData(nameForm);
     const obj = {};
-    console.log(formData)
 
     formData.forEach((value, key) => obj[key] = value);
 
@@ -21,11 +19,13 @@ nameForm.addEventListener('submit', async (e)=>{
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then((res)=>{
-                console.log(res)
-                socket.emit('userName', res)})
+            }).then(res=>res.json())
+            .then((res)=>{
+                console.log(res)})
         }
     } catch (error) {
         console.error('Hubo un error:', error);
     }
 })
+
+

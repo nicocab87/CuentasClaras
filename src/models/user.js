@@ -10,6 +10,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    email: String,
+    password: String,
+    age: Number,
     friends: {
         type: [friendSchema],
         default: []

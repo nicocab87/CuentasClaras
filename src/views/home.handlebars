@@ -1,4 +1,4 @@
-<div>
+<main>
     <p>Bienvenidxs</p>
     <div>
         <form action="" id="nameForm">
@@ -11,4 +11,42 @@
         </form>
     </div>
 
-</div>
+    <div id="userNames"> 
+        {{#if userData}}
+            {{#each userData}}
+
+                <p>Usuarios: {{name}}</p>
+                {{#if friends}}
+                    {{#each friends}}
+                        <p>Amigos por lo cuales divide el total: {{name}}</p>
+                    {{/each}}
+                {{/if}}
+                {{#else}}
+                    <p>Todavia no se agregó ningún amigo</p>
+                {{/else}}
+
+            {{/each}}
+        {{/if}}
+    </div>
+
+    <div>
+        <p>Agregar amigos:</p>
+        <form action="" id="friendForm">
+            <div class="field">
+                <label for="name" class="label">Name</label>
+                <input class="input" type="text" name="name" placeholder="Introduce tu nombre.."> 
+            </div>
+            <br>
+                <div class="field">
+                <label for="money" class="label">Cuanto puso</label>
+                <input class="input" type="number" name="money" placeholder="$..."> 
+            </div>
+            <br>
+
+            <button type="submit" class="button">Agregar</button>
+        </form>
+    </div>
+
+</main>
+
+<script src="/js/home.js"></script>
