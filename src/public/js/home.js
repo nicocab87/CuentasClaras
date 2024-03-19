@@ -12,7 +12,6 @@ nameForm.addEventListener('submit', async (e)=>{
     formData.forEach((value, key) => obj[key] = value);
 
     try {
-        if(!obj.name == ' '){
             await fetch('api/user/',{
                 method: 'POST',
                 body : JSON.stringify(obj),
@@ -22,7 +21,6 @@ nameForm.addEventListener('submit', async (e)=>{
             }).then(res=>res.json())
             .then((res)=>{
                 console.log(res)})
-        }
     } catch (error) {
         console.error('Hubo un error:', error);
     }

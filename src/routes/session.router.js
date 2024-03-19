@@ -15,12 +15,14 @@ router.get('/registerFail', async (req, res)=>{
 
 router.post('/login', passport.authenticate('login', {failureRedirect: '/api/session/loginFail'}), async(req, res)=>{
     try {
-        const user = req.body
+        const user = await UserModel.findOne({email: req.body.email})
+
 
         req.session.user = {
             name: user.name,
             email: user.email,
             age: user.age,
+            id: user._id
         }
 
         res.send({status: 'success', payload: req.session.user, message:'success'})
