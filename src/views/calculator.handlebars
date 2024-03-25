@@ -1,0 +1,26 @@
+<div>
+        <p>Agregar personas:</p>
+        <form action="" id="friendForm">
+            <div class="field">
+                <label for="name" class="label">Nombre:</label>
+                <input class="input" type="text" name="name" placeholder="Introduce tu nombre.."> 
+            </div>
+            <br>
+                <div class="field">
+                <label for="money" class="label">Cuanto puso</label>
+                <input class="input" type="number" name="money" placeholder="$..."> 
+            </div>
+            <br>
+
+            <button type="submit" class="button">Agregar</button>
+        </form>
+</div>
+
+<div id="friendsContainer"> </div>
+
+<div>
+    <button class="button">Calcular</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/calculator.js"></script>

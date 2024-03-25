@@ -1,0 +1,11 @@
+{
+    "configurations": [
+
+        {
+            "type": "chrome",
+            "name": "AddFriend",
+            "request": "launch",
+            "url": "http://localhost:3000/calculator"
+        }
+    ]
+}

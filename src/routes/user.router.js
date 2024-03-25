@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const manager = require("../db/user");
+const { default: mongoose } = require("mongoose");
 
 const router = Router()
 
@@ -14,11 +15,13 @@ router.post('/', async (req,res)=>{
     }
 });
 
-router.put('/addFriends/:uid', async (req,res)=>{
+router.post('/addFriends/:uid', async (req,res)=>{
     const friends = req.body;
-    const userId = req.params.uid;
+    const id = req.params.uid;
+    const userId = new mongoose.Types.ObjectId(id)
     
     try {
+        console.log(`User: ${userId}, Friend: ${friends}`)
         const data = await manager.addFriend(userId, friends)
         res.send({status:'success', data})
     } catch (error) {

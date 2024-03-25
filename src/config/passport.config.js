@@ -21,7 +21,7 @@ const initializePassport = ()=>{
             
             const newUser = {name, email, age, password: createHash(password)}
             const result = await UserModel.create (newUser)
-            console.log(result)
+
                 return done(null, result)
         } catch (error) {
             return done(error)

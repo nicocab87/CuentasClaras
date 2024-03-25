@@ -34,8 +34,7 @@ loginForm.addEventListener('submit', async (e)=>{
             }
         }).then((res) => {
             if (res.status == 200) {
-                console.log(res.status)
-                    window.location.replace("/");
+                    window.location.replace("/calculator");
             } else {
                 Swal.fire({
                 icon: "error",
