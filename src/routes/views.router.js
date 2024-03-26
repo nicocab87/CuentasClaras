@@ -43,5 +43,10 @@ router.get('/calculator', privateAccess, async(req, res)=>{
     res.render('calculator')
 })
 
+router.get('/results', privateAccess, async(req, res)=>{
+
+    res.render('results')
+})
+
 
 module.exports = router;

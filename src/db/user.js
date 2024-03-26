@@ -60,7 +60,7 @@ class UserManager {
             }
         });
 
-        let finalArray = { toPay:haveToPay, toBePaid:haveToBePaid, dontPay: dontHaveToPay }
+        let finalArray = { toPay:haveToPay, toBePaid:haveToBePaid, dontPay: dontHaveToPay, totalMoney }
 
         return finalArray
     }

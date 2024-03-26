@@ -1,7 +1,8 @@
 // Variables
 const friendForm = document.getElementById("friendForm");
 const userNamesDiv = document.getElementById("userNames");
-const friendsContainer = document.getElementById("friendsContainer")
+const friendsContainer = document.getElementById("friendsContainer");
+const calculateButton = document.getElementById("calculateButton");
 const socket = io();
 
 // Functions
@@ -43,6 +44,18 @@ const fecthCalculator = async (userID, payload)=>{
     }
 }
 
+//Initializate page
+fetch('/api/userInfo')
+        .then(response => response.json())
+        .then(data => {
+            const userId = data.userId;
+            addFriendsDiv(userId)
+        })
+        .catch(error => {
+            console.error('Hubo un error:', error);
+    });
+
+
 
 // EventListenner
 friendForm.addEventListener('submit', async (e)=>{
@@ -71,4 +84,3 @@ friendForm.addEventListener('submit', async (e)=>{
             console.error('Hubo un error:', error);
     });
 })
-
