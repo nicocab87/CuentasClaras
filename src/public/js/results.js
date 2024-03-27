@@ -1,6 +1,7 @@
 //variables
 const container = document.getElementById("container");
-const infoFriend = document.getElementById("infoFriend")
+const infoFriend = document.getElementById("infoFriend");
+const infoFriendResult = document.getElementById("infoFriendResult");
 let calculateArray;
 let resultArray;
 
@@ -15,6 +16,7 @@ const calculate = async (id) => {
 
         calculateArray = Object.entries(calculateData.data);
         resultArray = resultData.data;
+        console.log(resultArray)
     } catch (error) {
         console.error('Hubo un error:', error);
     }
@@ -26,14 +28,15 @@ fetch('/api/userInfo')
     .then(async data => {
         userId = data.userId;
         await calculate(userId);
-        await printArrays();
+        await printCalculateArray();
+        await printResultArray()
     })
     .catch(error => {
         console.error('Hubo un error:', error);
     });
 
 // Front-end
-const printArrays = async () => {
+const printCalculateArray = async () => {
     infoFriend.innerHTML = '';
 
     calculateArray.forEach(subArray => {
@@ -42,16 +45,34 @@ const printArrays = async () => {
 
         if (status !== 'totalMoney') {
             const infoFriendDiv = document.createElement('div');
-            const htmlContent = infoStatus.map(info => {
+            let htmlContent = '';
+
+            infoStatus.forEach(info => {
                 const data = info[1];
-                let innerHtml = '';
-                for (let key in data) {
-                    innerHtml += `<p>${key}: ${data[key]}</p>`;
-                }
-                return innerHtml;
-            }).join('');
-            infoFriendDiv.innerHTML = htmlContent;
+                htmlContent += `
+                    <p>${data.name} ${data.toPay? `debe pagar $${data.toPay}` : `le deben pagar: $${data.toBePaid}`}</p>
+                `;
+            });
+            infoFriend.classList.add("box")
+
+            infoFriendDiv.innerHTML = htmlContent; 
             infoFriend.appendChild(infoFriendDiv);
         }
     });
+}
+
+const printResultArray = () =>{
+    infoFriendResult.innerHTML = '';
+    let htmlContent = '';
+
+    resultArray.forEach((obj)=>{
+        htmlContent+= `
+        <div class="box resultArray">
+            <p>${obj.from} le debe pagar a ${obj.to}: $${obj.amount} </p>
+        </div>
+        `
+    })
+
+    infoFriendResult.innerHTML = htmlContent
+
 }

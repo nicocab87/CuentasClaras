@@ -1,0 +1,34 @@
+main {
+  background-color: #000505;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+}
+.resultContainer .infoFriendResult {
+  align-items: baseline;
+  flex-wrap: wrap;
+  display: flex;
+  gap: 2rem;
+}
+.resultContainer .infoFriendResult .resultArray {
+  justify-content: center;
+  align-items: center;
+}
+
+.containerCalculator {
+  display: flex;
+  flex-direction: column;
+}
+.containerCalculator .friendContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  margin: 3rem;
+  gap: 1rem;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -14,7 +14,7 @@ const addFriendsDiv = (userId)=>{
         data.forEach((element) => {
             const friendsDiv = document.createElement('div');
             friendsDiv.innerHTML = `
-            <div class="box">
+            <div class="boxFriend">
             <h1>${element.name}</h1>
             <h3>Ha puesto:$ ${element.money}</h3>
             </div>

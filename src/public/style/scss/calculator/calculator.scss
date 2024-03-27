@@ -1,0 +1,16 @@
+.containerCalculator{
+    display: flex;
+    flex-direction: column;
+
+    .friendContainer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: baseline;
+        margin: 3rem;
+        gap: 1rem;
+    }
+
+    
+}

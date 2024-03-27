@@ -1,6 +1,7 @@
-<div>
+<div class="containerCalculator">
+    <div>
         <p>Agregar personas:</p>
-        <form action="" id="friendForm">
+        <form action="" id="friendForm" class="form">
             <div class="field">
                 <label for="name" class="label">Nombre:</label>
                 <input class="input" type="text" name="name" placeholder="Introduce tu nombre.."> 
@@ -14,12 +15,14 @@
 
             <button type="submit" class="button">Agregar</button>
         </form>
-</div>
+    </div>
 
-<div id="friendsContainer"> </div>
+    <div id="friendsContainer" class="friendContainer"> </div>
 
-<div>
-    <a href="/results"> <button class="button">Calcular</button> </a>
+    <div>
+        <a href="/results"> <button class="button">Calcular</button> </a>
+    </div>
+
 </div>
 
 <script src="/socket.io/socket.io.js"></script>

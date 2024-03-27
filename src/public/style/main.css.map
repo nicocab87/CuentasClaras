@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["scss/reset&variables/reset&variables.scss","scss/result/result.scss","scss/calculator/calculator.scss"],"names":[],"mappings":"AASA;EACI,kBAPY;;;ACHhB;EACI;EACA;;AAEA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;;;ACZZ;EACI;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA","file":"main.css"}

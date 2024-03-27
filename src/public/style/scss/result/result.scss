@@ -1,0 +1,22 @@
+.resultContainer{
+    display: flex;
+    flex-direction: column;
+
+    .infoFriendResult{
+        align-items: baseline;
+        flex-wrap: wrap;
+        display: flex;
+        gap: 2rem;
+
+        .resultArray{
+            justify-content: center;
+            align-items: center;
+
+        }
+    }
+
+
+
+}
+
+

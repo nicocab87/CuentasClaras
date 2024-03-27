@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app"
+    "dev": "nodemon src/app",
+    "watch-sass": "sass --watch src/public/style/main.scss:src/public/style/main.css"
   },
   "keywords": [],
   "author": "",
