@@ -45,10 +45,11 @@ const fecthCalculator = async (userID, payload)=>{
 }
 
 //Initializate page
-fetch('/api/userInfo')
+fetch('/api/session/current')
         .then(response => response.json())
         .then(data => {
-            const userId = data.userId;
+            console.log(data.user.id, 'data')
+            const userId = data.user.id;
             addFriendsDiv(userId)
         })
         .catch(error => {

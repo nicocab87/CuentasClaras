@@ -4,7 +4,6 @@ const handlebars = require ('express-handlebars');
 const viewsRouter = require ('./routes/views.router');
 const userRouter = require ('./routes/user.router');
 const sessionRouter = require ('./routes/session.router');
-const userInfoRoute = require('./routes/userInfo.router');
 const mongoose  = require('mongoose');
 const { Server } = require('socket.io');
 const session = require ("express-session")
@@ -60,7 +59,6 @@ app.use(passport.session())
 app.use('/', viewsRouter)
 app.use('/api/user', userRouter)
 app.use('/api/session', sessionRouter)
-app.use('/api/userInfo', userInfoRoute)
 
 
 

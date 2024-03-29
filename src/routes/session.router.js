@@ -43,4 +43,12 @@ router.get('/logout', (req, res)=>{
     res.redirect('/login')
 })
 
+router.get('/current',async(req, res)=>{
+    if(req.session){
+        res.send({user: req.session.user})
+    }else{
+        console.error('No se ha iniciado ninguna sesión')
+    }
+})
+
 module.exports = router
