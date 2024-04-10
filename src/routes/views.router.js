@@ -6,7 +6,7 @@ const router = Router();
 // Middleware 
 
 const privateAccess = (req, res, next)=>{
-    if(!req.session.user) return res.redirect('/login')
+    if(!req.session.user) return res.redirect('/')
 
     next();
 }
@@ -30,10 +30,6 @@ router.get('/register', initializedSession, async(req, res)=>{
     res.render('register')
 })
 
-router.get('/login', initializedSession, async(req, res)=>{
-    res.render('login')
-})
-
 router.get('/profile', privateAccess, async (req, res)=>{
     res.render('profile', {user: req.session.user})
 })
@@ -49,4 +45,4 @@ router.get('/results', privateAccess, async(req, res)=>{
 })
 
 
-module.exports = router;
+module.exports =  router

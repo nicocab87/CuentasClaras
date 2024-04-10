@@ -10,7 +10,9 @@ const session = require ("express-session")
 const passport = require('passport');
 const initializePassport = require('./config/passport.config');
 const MongoStore = require('connect-mongo');
-const manager = require('./db/user');
+const friendManager = require('./db/friends');
+const friendRouter = require('./routes/friend.router');
+const calculateRouter  = require('./routes/calculate.router');
 require ('dotenv').config();
 
 
@@ -58,7 +60,10 @@ app.use(passport.session())
 // Routes
 app.use('/', viewsRouter)
 app.use('/api/user', userRouter)
+app.use('/api/friend', friendRouter)
+app.use('/api/calculate', calculateRouter)
 app.use('/api/session', sessionRouter)
+
 
 
 
@@ -78,7 +83,7 @@ io.on('connection', (socket)=>{
     })
 
     socket.on('addFriend', async (userID) => {
-        const data = await manager.getFriends(userID)
+        const data = await friendManager.getFriends(userID)
         socket.emit('dataToFiends', data)
     })
 
