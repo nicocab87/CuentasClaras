@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const { Mongoose } = require("mongoose");
 const friendManager = require("../db/friends");
 
 const router = Router()

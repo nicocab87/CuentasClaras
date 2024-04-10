@@ -1,0 +1,20 @@
+.containerCalculator {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  height: 100vh;
+}
+.containerCalculator .friendContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  padding: 3rem;
+  gap: 1rem;
+}
+.containerCalculator .friendContainer .boxFriend {
+  display: flex;
+  flex: 1;
+  gap: 5px;
+}/*# sourceMappingURL=calculator.css.map */

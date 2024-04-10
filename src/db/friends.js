@@ -1,9 +1,10 @@
+const MomentModel = require("../models/moment");
 const UserModel = require("../models/user");
 
 class FriendManager {
     
-    async addFriend(userId, newFriends){
-        const user = await UserModel.findById(userId)
+    async addFriend(momentId, newFriends){
+        const moment = await MomentModel.findById(userId)
         const updatedUser = user.friends.concat(newFriends)
         const data = await UserModel.updateOne({_id:user}, {friends:updatedUser});
         return data
