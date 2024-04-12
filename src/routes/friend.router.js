@@ -3,9 +3,9 @@ const friendManager = require("../db/friends");
 
 const router = Router()
 
-router.post('/addFriends/:uid', async (req,res)=>{
+router.post('/addFriends/:mid', async (req,res)=>{
     const friends = req.body;
-    const id = req.params.uid;
+    const id = req.params.mid;
     //const userId = new Mongoose.Types.ObjectId(id)
     
     try {
@@ -17,23 +17,24 @@ router.post('/addFriends/:uid', async (req,res)=>{
     }
 });
 
-router.post('/:uid/deleteFriend/:fid', async(req, res)=>{
-    const userId = req.params.uid;
+//Cambiar POST por lo que tenga que ir
+router.delete('/:mid/deleteFriend/:fid', async(req, res)=>{
+    const momentId = req.params.mid;
     const friendId = req.params.fid
 
     try {
-        const data = friendManager.deleteFriend(userId, friendId)
+        const data = await friendManager.deleteFriend(momentId, friendId)
         res.send({status:'success', data})
-    } catch (error) {
-        res.status(400).send({status:'error', error})
+    } catch (err) {
+        res.status(400).send({status:'error', err})
     }
 })
 
-router.get('/getFriends/:uid', async (req, res)=>{
-    const userId = req.params.uid;
+router.get('/:mid', async (req, res)=>{
+    const momentId = req.params.uid;
 
     try {
-        const data = await manager.getFriends(userId);
+        const data = await friendManager.getFriends(momentId)
         res.send({status:'success', data})
     } catch (error) {
         res.status(400).send({status:'error', error})

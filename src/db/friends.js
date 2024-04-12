@@ -1,30 +1,37 @@
-const MomentModel = require("../models/moment");
-const UserModel = require("../models/user");
+const mongoose = require('mongoose');
+const FriendModel = require ('../models/friend');
+const momentManager = require('./moments');
 
 class FriendManager {
     
     async addFriend(momentId, newFriends){
-        const moment = await MomentModel.findById(userId)
-        const updatedUser = user.friends.concat(newFriends)
-        const data = await UserModel.updateOne({_id:user}, {friends:updatedUser});
+        const friend = await FriendModel.create(newFriends)
+        const moment = await momentManager.getMomentById(momentId)
+
+        moment.friends.push(friend._id)
+        console.log(moment)
+        const data = await momentManager.updateMoment(momentId, moment)
         return data
     }
 
-    async deleteFriend(userId, idFriend) {
-        const user = await UserModel.findById(userId);
+    async deleteFriend(momentId, idFriend) {
 
-        const updatedFriends = user.friends.filter(friend => friend._id.toString() !== idFriend );
-        const data = await UserModel.updateOne({ _id: userId }, { friends: updatedFriends });
+        const moment = await momentManager.getMomentById(momentId)
+
+        const updatedMoment = moment[0].friends.filter(m => m._id.toString() !== idFriend);
+        const data = await momentManager.updateMoment(momentId, updatedMoment)
+        console.log(data, 'data')
         return data;
     }
 
-    async getFriends(userId){
-        const user = await UserModel.findById(userId).lean()
-        if(!user){
-            return console.error('No se ha encontrado el usuario')
+    async getFriends(momentId){
+        const data = await momentManager.getMomentById(momentId)
+        console.log(data)
+        const friend = data.friends
+        if(!data){
+            return console.error('El ID no coincide con ningún momento')
         }
-        const data = user.friends
-        return data
+        return friend
     }
 }
 

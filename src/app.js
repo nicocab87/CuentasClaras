@@ -3,6 +3,9 @@ const errorHandler = require('express-error-handler');
 const handlebars = require ('express-handlebars');
 const viewsRouter = require ('./routes/views.router');
 const userRouter = require ('./routes/user.router');
+const momentRouter = require ('./routes/moment.router');
+const friendRouter = require('./routes/friend.router');
+const calculateRouter  = require('./routes/calculate.router');
 const sessionRouter = require ('./routes/session.router');
 const mongoose  = require('mongoose');
 const { Server } = require('socket.io');
@@ -11,16 +14,13 @@ const passport = require('passport');
 const initializePassport = require('./config/passport.config');
 const MongoStore = require('connect-mongo');
 const friendManager = require('./db/friends');
-const friendRouter = require('./routes/friend.router');
-const calculateRouter  = require('./routes/calculate.router');
-require ('dotenv').config();
 
+require ('dotenv').config();
 
 const app = express ();
 const port = 3000;
 
 // Handlebars setting
-
 const hbs = handlebars.create({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
@@ -60,19 +60,16 @@ app.use(passport.session())
 // Routes
 app.use('/', viewsRouter)
 app.use('/api/user', userRouter)
+app.use('/api/moment', momentRouter)
 app.use('/api/friend', friendRouter)
 app.use('/api/calculate', calculateRouter)
 app.use('/api/session', sessionRouter)
-
-
 
 
 // Server up
 const server = app.listen(port,()=>console.log(`Se ha levantado el servidor ${port}`));
 
 // socket.io
-
-
 const io = new Server(server);
 
 io.on('connection', (socket)=>{
@@ -86,6 +83,5 @@ io.on('connection', (socket)=>{
         const data = await friendManager.getFriends(userID)
         socket.emit('dataToFiends', data)
     })
-
 })
 
