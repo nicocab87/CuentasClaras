@@ -14,6 +14,7 @@ const passport = require('passport');
 const initializePassport = require('./config/passport.config');
 const MongoStore = require('connect-mongo');
 const friendManager = require('./db/friends');
+const momentManager = require('./db/moments');
 
 require ('dotenv').config();
 
@@ -79,9 +80,16 @@ io.on('connection', (socket)=>{
         console.log(`${socket,id} desconectado`)
     })
 
+    // Socket que se usa para obtener los datos de friends
     socket.on('addFriend', async (userID) => {
         const data = await friendManager.getFriends(userID)
         socket.emit('dataToFiends', data)
+    })
+
+    // Socket que se usa para obtener los datos de moments
+    socket.on('addMoment', async(userId)=>{
+        const data = await momentManager.getMoments(userId)
+        socket.emit('dataToMoments', data)
     })
 })
 

@@ -1,5 +1,18 @@
 <div class="containerCalculator">
-    <div>
+    <div id="momentContainer">
+        <p>Crea un momento indicando la referencia del dia o a donde fuiste, luego añade personas y cuanto pusieron cada una, y al apretar calcular te indicará cuanto deberá poner cada uno y a quien</p>
+        <form action="" id="momentForm" class="form">
+            <div>
+                <label for="name" class="name">Nombre del momento</label>
+                <input type="text" class="input" name="name" placeholder="Previa del partido del domingo.." required>
+            </div>
+            <button type="submit" class="button">Agregar</button>
+        </form>
+    </div>
+
+    <div id="moments"></div>
+
+    {{!-- <div>
         <p>Agregar personas:</p>
         <form action="" id="friendForm" class="form">
             <div class="field">
@@ -21,9 +34,9 @@
 
     <div>
         <a href="/results"> <button class="button">Calcular</button> </a>
-    </div>
+    </div> --}}
 
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/calculator.js"></script>
+<script src="/js/moments.js" type="module"></script>

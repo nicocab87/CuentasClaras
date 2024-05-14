@@ -27,19 +27,22 @@ class MomentManager{
         }
     }
 
+    async getMoments(id){
+        const data = await UserModel.find({_id:id}).populate('moments')
+        const dataMoment = data[0].moments
+        return dataMoment
+    }
+
     async getMomentById(id){
-        const data = await MomentModel.find({_id:id});
+        const data = await MomentModel.find({_id:id}).populate('moments');
         return data
     }
 
     async updateMoment(id, update){
         //const moment = momentManager.getMomentById(id)
         const data = await MomentModel.updateOne({_id:id}, {friends:update})
-        console.log(data,'data en update moment')
         return data
     }
-
-    
 }
 
 const momentManager = new MomentManager();

@@ -79,7 +79,6 @@ const obtenerUserId = async () => {
 fetch('/api/session/current')
         .then(response => response.json())
         .then(data => {
-            console.log(data.user.id, 'data')
             const userId = data.user.id;
             addFriendsDiv(userId)
         })
@@ -128,3 +127,7 @@ friendsContainer.addEventListener('click', async (event) => {
         }
     }
 });
+
+module.exports={
+    obtenerUserId
+}
