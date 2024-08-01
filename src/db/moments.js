@@ -1,5 +1,6 @@
 const MomentModel = require("../models/moment");
 const UserModel = require("../models/user");
+const manager = require("./user");
 
 class MomentManager{
 
@@ -28,7 +29,8 @@ class MomentManager{
     }
 
     async getMoments(id){
-        const data = await UserModel.find({_id:id}).populate('moments')
+        const data = await manager.getUserById(id)
+        console.log(data,'data')
         const dataMoment = data[0].moments
         return dataMoment
     }
