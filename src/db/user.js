@@ -16,7 +16,7 @@ class UserManager {
         return data
     }
     async getUserById(id){
-        const data = await UserModel.findOne({_id:id}).populate('moment')
+        const data = await UserModel.findOne({_id:id}).populate('moments')
         if(!data) console.error('el usuario no existe')
         return data
     }

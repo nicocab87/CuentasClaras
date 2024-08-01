@@ -31,7 +31,8 @@ class MomentManager{
     async getMoments(id){
         const data = await manager.getUserById(id)
         console.log(data,'data')
-        const dataMoment = data[0].moments
+        console.log(id,'id')
+        const dataMoment = data.moments
         return dataMoment
     }
 
