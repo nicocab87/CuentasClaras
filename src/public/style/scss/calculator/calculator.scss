@@ -1,6 +1,8 @@
 .containerCalculator{
     display: flex;
     flex-direction: column;
+    padding: 2rem;
+    height: 100vh;
 
     .friendContainer{
         display: flex;
@@ -8,9 +10,14 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: baseline;
-        margin: 3rem;
+        padding: 3rem;
         gap: 1rem;
-    }
 
-    
+        .boxFriend{
+            display: flex;
+            flex: 1;
+            gap:5px;
+
+        }
+    }
 }

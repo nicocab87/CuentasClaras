@@ -3,6 +3,9 @@ const errorHandler = require('express-error-handler');
 const handlebars = require ('express-handlebars');
 const viewsRouter = require ('./routes/views.router');
 const userRouter = require ('./routes/user.router');
+const momentRouter = require ('./routes/moment.router');
+const friendRouter = require('./routes/friend.router');
+const calculateRouter  = require('./routes/calculate.router');
 const sessionRouter = require ('./routes/session.router');
 const mongoose  = require('mongoose');
 const { Server } = require('socket.io');
@@ -10,15 +13,15 @@ const session = require ("express-session")
 const passport = require('passport');
 const initializePassport = require('./config/passport.config');
 const MongoStore = require('connect-mongo');
-const manager = require('./db/user');
-require ('dotenv').config();
+const friendManager = require('./db/friends');
+const momentManager = require('./db/moments');
 
+require ('dotenv').config();
 
 const app = express ();
 const port = 3000;
 
 // Handlebars setting
-
 const hbs = handlebars.create({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
@@ -58,16 +61,16 @@ app.use(passport.session())
 // Routes
 app.use('/', viewsRouter)
 app.use('/api/user', userRouter)
+app.use('/api/moment', momentRouter)
+app.use('/api/friend', friendRouter)
+app.use('/api/calculate', calculateRouter)
 app.use('/api/session', sessionRouter)
-
 
 
 // Server up
 const server = app.listen(port,()=>console.log(`Se ha levantado el servidor ${port}`));
 
 // socket.io
-
-
 const io = new Server(server);
 
 io.on('connection', (socket)=>{
@@ -77,10 +80,16 @@ io.on('connection', (socket)=>{
         console.log(`${socket,id} desconectado`)
     })
 
+    // Socket que se usa para obtener los datos de friends
     socket.on('addFriend', async (userID) => {
-        const data = await manager.getFriends(userID)
+        const data = await friendManager.getFriends(userID)
         socket.emit('dataToFiends', data)
     })
 
+    // Socket que se usa para obtener los datos de moments
+    socket.on('addMoment', async(userId)=>{
+        const data = await momentManager.getMoments(userId)
+        socket.emit('dataToMoments', data)
+    })
 })
 

@@ -53,7 +53,7 @@ fetch('/api/session/current')
                         <a href="/register" class="button is-primary">
                             <strong>Sign up</strong>
                         </a>
-                        <a href="/login" class="button is-light">
+                        <a href="/" class="button is-light">
                             Log in
                         </a>
                     </div>

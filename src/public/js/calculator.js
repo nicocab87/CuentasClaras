@@ -3,6 +3,7 @@ const friendForm = document.getElementById("friendForm");
 const userNamesDiv = document.getElementById("userNames");
 const friendsContainer = document.getElementById("friendsContainer");
 const calculateButton = document.getElementById("calculateButton");
+const deleteButtons = document.querySelectorAll('.delete');
 const socket = io();
 
 // Functions
@@ -15,8 +16,9 @@ const addFriendsDiv = (userId)=>{
             const friendsDiv = document.createElement('div');
             friendsDiv.innerHTML = `
             <div class="boxFriend">
-            <h1>${element.name}</h1>
-            <h3>Ha puesto:$ ${element.money}</h3>
+                <h1>${element.name}</h1>
+                <h3>ha puesto: $${element.money}</h3>
+                <button id="delete_${element._id}" data-friend-id="${element._id}" class="delete"> </button>
             </div>
             `
             friendsDiv.classList.add("box");
@@ -26,10 +28,9 @@ const addFriendsDiv = (userId)=>{
     })
 }
 
-
 const fecthCalculator = async (userID, payload)=>{
     try {
-        await fetch(`/api/user/addFriends/${userID}`,{
+        await fetch(`/api/friend/addFriends/${userID}`,{
             method: 'POST',
             body : JSON.stringify(payload),
             headers: {
@@ -44,11 +45,40 @@ const fecthCalculator = async (userID, payload)=>{
     }
 }
 
+const borrarAmigo = async (userId, friendId) => {
+    console.log('borrar desde funcion')
+    try {
+        const response = await fetch(`/api/friend/${userId}/deleteFriend/${friendId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            addFriendsDiv(userId)
+        } else {
+            console.error('Error al eliminar el amigo');
+        }
+    } catch (error) {
+        console.error('Hubo un error:', error);
+    }
+}
+
+const obtenerUserId = async () => {
+    try {
+        const response = await fetch('/api/session/current');
+        const data = await response.json();
+        return data.user.id; // Devuelve el ID del usuario desde la respuesta del servidor
+    } catch (error) {
+        console.error('Hubo un error al obtener el ID de usuario:', error);
+        return null; // En caso de error, devuelve null
+    }
+}
+
 //Initializate page
 fetch('/api/session/current')
         .then(response => response.json())
         .then(data => {
-            console.log(data.user.id, 'data')
             const userId = data.user.id;
             addFriendsDiv(userId)
         })
@@ -73,11 +103,10 @@ friendForm.addEventListener('submit', async (e)=>{
         }
     });
 
-
-    fetch('/api/userInfo')
+    fetch('/api/session/current')
         .then(response => response.json())
         .then(data => {
-            const userId = data.userId;
+            const userId = data.user.id;
             fecthCalculator(userId, payload);
             friendForm.reset();
         })
@@ -85,3 +114,20 @@ friendForm.addEventListener('submit', async (e)=>{
             console.error('Hubo un error:', error);
     });
 })
+
+friendsContainer.addEventListener('click', async (event) => {
+    const button = event.target.closest('.delete'); 
+    if (button) {
+        const userId = await obtenerUserId(); 
+        const friendId = button.dataset.friendId; 
+        console.log(friendId)
+        if (userId) {
+            await borrarAmigo(userId, friendId); 
+            await addFriendsDiv(userId)
+        }
+    }
+});
+
+module.exports={
+    obtenerUserId
+}

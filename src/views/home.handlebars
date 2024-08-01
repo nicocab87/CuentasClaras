@@ -60,9 +60,27 @@
 
     <div class="box homeBox">
         <p class="subtitle is-3">Para ingresar inicia sesión o registrate</p>
-        <a class="loginButton" href="/login"> <button class="button">Iniciar sesion</button></a> <a class="registerButton" href="/register"><button class="button">Registrarte</button></a>
-        <p class="googleButton">Ingresa con Google(proximamente)(?)</p>
+        <div class="loginContainer">
+            <form action=""  id="loginForm" class="loginForm">
+                <div>
+                    <label for="email" class="label">Email</label>
+                    <input type="text" name="email"/>
+                </div>
+                <div>
+                    <label for="password" class="label">Contraseña</label>
+                    <input type="password" name="password"/>
+                </div>
+                <button id="loginButton" type="submit" class="button">Entrar</button>   
+            </form>
+        </div>
+        <div class="googleButton"> 
+            <a href="/register"><button class="button">Registrate</button></a>
+            <p>Ingresa con Google(proximamente)(?)</p> 
+        </div>
     </div>
 </div>
 
-<script src="/js/home.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/login.js"></script>
+]<script src="/js/home.js"></script>

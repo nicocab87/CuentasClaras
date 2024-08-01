@@ -40,7 +40,7 @@ router.get('/logout', (req, res)=>{
     req.session.destroy((err)=>{
         if(err) return res.status(500).send('There was an error')
     })
-    res.redirect('/login')
+    res.redirect('/')
 })
 
 router.get('/current',async(req, res)=>{

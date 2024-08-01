@@ -1,5 +1,5 @@
 .homeContainer{
-    height: 100vh;
+    height: 95vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -9,32 +9,28 @@
     .homeBox{
         grid-area: 1 / 2 / 2 / 3;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: 1fr;
+        grid-template-rows: .7fr 1fr 0.3fr;
         grid-column-gap: 0px;
         grid-row-gap: 0px;
-            
-            
-            p { 
-                grid-area: 1 / 1 / 2 / 3;
-                align-self:flex-end;
-                justify-self: center;
-            }
-            .loginButton{ 
-                grid-area: 2 / 1 / 3 / 2;
-                align-self: center;
-                justify-self:flex-end;
-            }
-            .registerButton {
-                grid-area: 2 / 2 / 3 / 3;
-                align-self: center;
-                justify-self:flex-start;
-            }
-            .googleButton {
-                grid-area: 3 / 1 / 4 / 3;
-                align-self:flex-start;
-                justify-self: center;
-            }
+
+        p { 
+            grid-area: 1 / 1 / 2 / 2;
+            align-self:flex-end;
+            justify-self: center;
+        }
+
+        .loginContainer{
+            grid-area: 2 / 1 / 3 / 2;
+            align-self: center;
+            justify-self:center;
+        }
+
+        .googleButton {
+            grid-area: 3 / 1 / 4 / 2;;
+            align-self:flex-start;
+            justify-self: center;
+        }
     }
 
     .textBox{

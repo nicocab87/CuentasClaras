@@ -1,9 +1,4 @@
-const { mongoose } = require("mongoose");
-
-const friendSchema = new mongoose.Schema({
-    name: String,
-    money: Number
-})
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -13,10 +8,10 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     age: Number,
-    friends: {
-        type: [friendSchema],
-        default: []
-    }
+    moments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'moment' 
+    }]
 })
 
 const UserModel = mongoose.model('user', userSchema)    
